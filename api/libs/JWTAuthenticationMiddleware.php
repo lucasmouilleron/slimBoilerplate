@@ -48,13 +48,19 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
     /////////////////////////////////////////////////////////////////
     public function login($username, $password) {
 
-    //TODO AUTHENTICATE AGAINST DB OR WHATEVER
-
-        $data = array(
-            "login" => $username,
-            "extra" => "yeah !"
-            );
-        return \JWT::encode($data, $this->JWTSignature);
+        //TODO AUTHENTICATE AGAINST DB OR WHATEVER
+        $auth = false;
+        if($auth) 
+        {
+            $data = array(
+                "username" => $username,
+                "extra" => "yeah !"
+                );
+            return \JWT::encode($data, $this->JWTSignature);
+        }
+        else {
+            return false;
+        }
     }
 
     /////////////////////////////////////////////////////////////////
