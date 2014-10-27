@@ -49,7 +49,7 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
     public function login($username, $password) {
 
         //TODO AUTHENTICATE AGAINST DB OR WHATEVER
-        $auth = false;
+        $auth = true;
         if($auth) 
         {
             $data = array(
