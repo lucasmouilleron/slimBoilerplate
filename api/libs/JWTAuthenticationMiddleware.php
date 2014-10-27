@@ -22,19 +22,25 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
     public function call()
     {
         $app = $this->app;
+
         if($this->isProtected($app->request->getPathInfo())) 
         {
             try 
             {
                 $token = $this->getToken($app->environment);
                 $decoded = \JWT::decode($token, $this->JWTSignature);
+                $this->next->call();
             } 
             catch(\Exception $e) 
             {
+                $app->response->body("Forbidden");
                 $app->response->setStatus("403");
             }        
         }
-        $this->next->call();
+        else 
+        {
+            $this->next->call();
+        }
     }
 
     /////////////////////////////////////////////////////////////////
