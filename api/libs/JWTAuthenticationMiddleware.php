@@ -22,7 +22,6 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
     public function call()
     {
         $app = $this->app;
-
         if($this->isProtected($app->request->getPathInfo())) 
         {
             try 
@@ -33,10 +32,17 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
                 $tokenDecoded = \JWT::decode($token, $this->JWTSignature);
                 $this->next->call();
             } 
-            catch(\Exception $e) 
+            catch(\Exception $e)
             {
-                $app->response->body("Forbidden");
-                $app->response->setStatus("403");
+                if ($e instanceof \DomainException OR $e instanceof \UnexpectedValueException) 
+                {
+                    $app->response->body("Forbidden");
+                    $app->response->setStatus("403");
+                }
+                else 
+                {
+                    throw $e;
+                }
             }        
         }
         else 
@@ -46,8 +52,8 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
     }
 
     /////////////////////////////////////////////////////////////////
-    public function login($username, $password) {
-
+    public function login($username, $password) 
+    {
         //TODO AUTHENTICATE AGAINST DB OR WHATEVER
         $auth = true;
         if($auth) 
@@ -64,7 +70,8 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
     }
 
     /////////////////////////////////////////////////////////////////
-    protected function isProtected($pathInfo) {
+    protected function isProtected($pathInfo) 
+    {
         foreach ($this->protectedResources as $protectedResource) 
         {
             $protectedResource = "@^/".$protectedResource."$@";
