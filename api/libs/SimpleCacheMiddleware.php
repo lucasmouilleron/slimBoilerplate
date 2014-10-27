@@ -49,8 +49,8 @@ class SimpleCacheMiddleware extends \Slim\Middleware
     }
 
     /////////////////////////////////////////////////////////////////
-    private function isCached($uri, $method) {
-        foreach ($this->cachedResources as $cachedResourceKey => $cachedResourceValue)
+    protected function isCached($pathInfo, $method) {
+        foreach ($this->cachedResources as $cachedResourceKey => $cachedResourceValue) 
         {
             $methodResource = "GET";
             $cachedResourceExpiry = $cachedResourceValue;
@@ -58,7 +58,8 @@ class SimpleCacheMiddleware extends \Slim\Middleware
                 $methodResource = $cachedResourceValue[1];
                 $cachedResourceExpiry = $cachedResourceValue[0];
             }
-            if ($methodResource == $method && strpos($uri, $cachedResourceKey) !== FALSE)
+            $cachedResourceKey = "@^/".$cachedResourceKey."$@";
+            if ($methodResource == $method && preg_match($cachedResourceKey, $pathInfo) == 1) 
             {
                 return $cachedResourceExpiry;
             }

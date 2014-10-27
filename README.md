@@ -25,6 +25,15 @@ Install
 - `cd api && composer install`
 - `cd build && npm install`
 
+Run and tests
+-------------
+- little JS app at `index.php` and `_dev/js`
+- php requests at `test.php`
+
+TODO
+----
+- edit `api/libs/JWTAuthenticationMiddleware.php` > `JWTAuthenticationMiddleware->doLogin` to add login logic
+
 Credits
 -------
 Thanks to guys at [Slim](http://www.slimframework.com)
