@@ -1,0 +1,12 @@
+{
+    "name": "slimBoilerplate",
+    "require": {
+        "slim/slim": "2.*",
+        "rmccue/requests": ">=1.0",
+        "gilbitron/php-simplecache": "~1.4",
+        "firebase/php-jwt": "~1.0"
+    },
+    "config": {
+        "vendor-dir": "libs/vendor"
+    }
+}
