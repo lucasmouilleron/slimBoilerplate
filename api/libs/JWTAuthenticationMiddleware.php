@@ -27,8 +27,10 @@ class JWTAuthenticationMiddleware extends \Slim\Middleware
         {
             try 
             {
+                global $token;
                 $token = $this->getToken($app->environment);
-                $decoded = \JWT::decode($token, $this->JWTSignature);
+                global $tokenDecoded;
+                $tokenDecoded = \JWT::decode($token, $this->JWTSignature);
                 $this->next->call();
             } 
             catch(\Exception $e) 

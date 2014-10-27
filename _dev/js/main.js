@@ -100,13 +100,13 @@ require(["jquery", "tools", "cookies", "handlebars", "bootstrap", "notify-bootst
                 Cookies.set("token", token);
             }
             token = Cookies.get("token");
-            if(Cookies.get("token") !== "-1") {
-                $("#login").hide();
-                $("#logout").show();
-            }
-            else {
+            if(token == "-1" || token == undefined) {
                 $("#login").show();
                 $("#logout").hide();
+            }
+            else {
+                $("#login").hide();
+                $("#logout").show();
             }
             $("#token").html(token);
         }

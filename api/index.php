@@ -66,7 +66,8 @@ $app->post("/post/:name", function ($name) use ($app) {
 
 /////////////////////////////////////////////////////////////////
 $app->get("/private/:name", function ($name) {
-    echo json_encode(array("body" => "Private hello ".$name));
+    global $tokenDecoded;
+    echo json_encode(array("body" => "Private hello ".var_export($tokenDecoded, true))) ;
 });
 
 /////////////////////////////////////////////////////////////////
