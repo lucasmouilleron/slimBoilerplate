@@ -3,6 +3,8 @@ slimBoilerplate
 
 Slim is a lightweight but powerfull API Rest PHP framework.
 
+![Screenshot](http://grabs.lucasmouilleron.com/Screen%20Shot%202015-11-22%20at%2018.59.37.png)
+
 Features
 --------
 - A nice slim boilerplate
